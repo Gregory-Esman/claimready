@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ClaimReady — Get your insurance claim to actually pay</title>
+<meta name="description" content="Insurers bury the rules that decide whether your claim pays. ClaimReady turns your new policy into a plain-English claim-readiness checklist you can finish this week." />
+<style>
+  :root{
+    --ink:#0f1c2e; --ink-2:#33475b; --mut:#66788c; --line:#e2e8f0;
+    --bg:#f7f9fc; --card:#ffffff; --brand:#12447a; --brand-2:#1e6fd0;
+    --amber:#e08a1e; --good:#1f9d63; --good-bg:#e8f6ee;
+    --shadow:0 1px 2px rgba(15,28,46,.06),0 8px 24px rgba(15,28,46,.06);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand-2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+
+  header{position:sticky;top:0;z-index:20;background:rgba(247,249,252,.85);
+    backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:19px}
+  .mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:grid;place-items:center;color:#fff;font-size:15px}
+  .nav a.cta{background:var(--brand);color:#fff;padding:9px 16px;border-radius:9px;font-weight:600;font-size:14px}
+  .nav a.cta:hover{background:#0d3763;text-decoration:none}
+
+  .hero{padding:64px 0 40px;text-align:center}
+  .kick{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--amber);background:#fbf1e0;padding:5px 12px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;font-weight:820}
+  h1 .u{background:linear-gradient(180deg,transparent 62%,#fbe0b6 62%)}
+  .sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-2);max-width:640px;margin:0 auto 28px}
+  .btn{display:inline-block;cursor:pointer;border:0;font:inherit;font-weight:700;
+    background:var(--brand);color:#fff;padding:14px 26px;border-radius:11px;box-shadow:var(--shadow)}
+  .btn:hover{background:#0d3763;text-decoration:none}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{background:#fff;border-color:#cbd5e1}
+  .trust{margin-top:16px;font-size:13.5px;color:var(--mut)}
+
+  section{padding:44px 0}
+  .lede{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-2);margin:0 0 8px}
+  h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .why .c{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .why .c b{display:block;margin-bottom:6px;font-size:16px}
+  .why .c p{margin:0;color:var(--ink-2);font-size:14.5px}
+
+  /* tool */
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .tool .top{padding:24px 24px 4px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 20px}
+  .tab{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink-2);
+    padding:10px 15px;border-radius:10px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px}
+  .tab:hover{border-color:#cbd5e1}
+  .tab[aria-selected="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .tab .em{font-size:15px}
+
+  .panel{border-top:1px solid var(--line);padding:22px 24px 8px;background:#fbfcfe}
+  .paneltitle{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+  .paneltitle h3{margin:0;font-size:19px;letter-spacing:-.01em}
+  .paneltitle .n{font-size:13px;color:var(--mut);white-space:nowrap}
+  .progwrap{margin:14px 0 6px}
+  .progbar{height:9px;background:#eaeef4;border-radius:999px;overflow:hidden}
+  .progfill{height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--good));transition:width .35s ease}
+  .readout{margin:10px 0 4px;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  .readout.win{color:var(--good)}
+
+  ul.items{list-style:none;margin:12px 0 4px;padding:0}
+  li.item{display:flex;gap:13px;padding:14px 0;border-top:1px solid var(--line)}
+  li.item:first-child{border-top:0}
+  .cb{flex:0 0 auto;margin-top:2px}
+  .cb input{position:absolute;opacity:0;width:22px;height:22px;cursor:pointer}
+  .box{width:22px;height:22px;border:2px solid #c3cfdd;border-radius:6px;display:grid;place-items:center;
+    transition:.12s;color:#fff;font-size:14px;font-weight:800}
+  .cb input:checked + .box{background:var(--good);border-color:var(--good)}
+  .cb input:focus-visible + .box{outline:2px solid var(--brand-2);outline-offset:2px}
+  .item .txt b{display:block;font-size:15.5px;transition:.12s}
+  .cb input:checked ~ .txt b{color:var(--mut);text-decoration:line-through}
+  .item .txt p{margin:3px 0 0;color:var(--ink-2);font-size:14px}
+  .item .txt p .lab{color:var(--amber);font-weight:700}
+  .disclaim{margin:16px 0 2px;padding-top:13px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--mut)}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+    padding:16px 24px 22px;border-top:1px solid var(--line)}
+  .toolbar .small{font-size:13px;color:var(--mut)}
+  .linkbtn{background:none;border:0;font:inherit;color:var(--brand-2);cursor:pointer;font-weight:600;padding:0}
+  .linkbtn:hover{text-decoration:underline}
+
+  .foot{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--mut);font-size:14px}
+  .foot .big{color:var(--ink-2);font-size:15px;max-width:640px;margin:0 0 14px}
+
+  @media(max-width:680px){
+    .why{grid-template-columns:1fr}
+    .hero{padding:44px 0 28px}
+    .nav a.cta{display:none}
+  }
+  @media print{
+    header,.hero,.why-sec,.toolbar,.tabs,.foot,.btn{display:none!important}
+    body{background:#fff}
+    .tool{border:0;box-shadow:none}
+    .panel{background:#fff}
+    li.item{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">✓</span>ClaimReady</div>
+    <a class="cta" href="#tool">Build my checklist</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <span class="kick">The stuff insurers won't tell you upfront</span>
+      <h1>Your policy hides the rules that decide<br><span class="u">whether your claim actually pays.</span></h1>
+      <p class="sub">Nobody coaches you when you buy insurance. You find out what you were supposed to do — the photos, the dates, the proof — only after a claim gets denied. ClaimReady flips that around: a plain-English checklist you finish <em>this week</em>, so a future claim is provable.</p>
+      <a class="btn" href="#tool">Build my claim-readiness checklist →</a>
+      <div class="trust">Free · No account · Nothing leaves your browser · Print &amp; keep</div>
+    </section>
+  </div>
+
+  <div class="wrap why-sec">
+    <section>
+      <p class="lede">Why this exists</p>
+      <h2>The system is backward on purpose</h2>
+      <div class="why">
+        <div class="c"><b>They disclose, they don't teach</b><p>The rules live in a policy booklet written by lawyers. Legally "told you." Practically, nobody reads it — until it's too late.</p></div>
+        <div class="c"><b>Your agent won't coach you</b><p>Agents sell and service policies. Easier, better-documented claims are worse for the insurer's bottom line. Nobody's paid to prep you.</p></div>
+        <div class="c"><b>You learn at claim time</b><p>The moment you need proof is the moment you discover you don't have it — the working photo, the reliable date, the receipt. Now it's a denial.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap" id="tool">
+    <section>
+      <p class="lede">Do it now, once</p>
+      <h2>Build your claim-readiness checklist</h2>
+      <p class="sub" style="margin:6px 0 22px;text-align:left">Pick what you just got covered. Each item tells you <em>why it matters at claim time</em>. Check them off — your progress saves in this browser.</p>
+
+      <div class="tool">
+        <div class="top" style="padding-bottom:0"></div>
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="panel">
+          <div class="paneltitle">
+            <h3 id="panelTitle"></h3>
+            <span class="n" id="panelCount"></span>
+          </div>
+          <div class="progwrap"><div class="progbar"><div class="progfill" id="progfill"></div></div></div>
+          <div class="readout" id="readout"></div>
+          <ul class="items" id="items"></ul>
+          <p class="disclaim">General guidance — your policy's actual terms control. Educational, not legal or insurance advice.</p>
+        </div>
+        <div class="toolbar">
+          <span class="small">Saved automatically on this device. <button class="linkbtn" id="reset">Reset this list</button></span>
+          <button class="btn" id="print" style="padding:10px 18px">🖨 Print / save as PDF</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <footer class="foot">
+      <p class="big"><strong>Built because a real claim got denied.</strong> A working camera lens, a policy two weeks old, and no dated proof it broke while covered. Every item on these lists is a failure mode someone actually hit. Do them before you need them.</p>
+      <p>ClaimReady is educational, not legal or insurance advice — always read your own policy and confirm specifics with your insurer. Free &amp; open. Nothing you check here is uploaded anywhere.</p>
+    </footer>
+  </div>
+</main>
+
+<script>
+const DATA = {
+  valuables: {
+    label:"Scheduled valuables", emoji:"📷",
+    blurb:"Cameras, jewelry, watches, instruments, e-bikes — high value, claim-prone, biggest documentation gap.",
+    items:[
+      ["Photograph every item working / in good condition — right now","This baseline shot is the single thing that proves the item was fine before the loss. Without it, an insurer can argue the damage pre-dated your coverage."],
+      ["Fix your camera/phone clock and timezone before you take those photos","Wrong device dates make your own photos useless as proof. A photo stamped with the wrong year can't place a loss inside your coverage window."],
+      ["Back the photos up to the cloud (Google Photos, iCloud, etc.)","The server's upload date is a timestamp you can't accidentally break — independent proof of when the item still worked."],
+      ["Photograph each serial number, legibly","Serials identify the exact insured item in a claim and tie your proof-of-value to the thing that was lost."],
+      ["Save receipts / proof of ownership in one place","You have to prove you own it and what it's worth. Gifted item? Get a short signed letter from whoever bought it."],
+      ["Read your declarations page: class limit, per-item cap, deductible","Know what you're actually covered for before you need it — many valuables riders cap individual items lower than you'd expect."],
+      ["Learn covered vs. excluded: accidental damage usually pays; wear, mechanical breakdown, and inherent defect usually don't","How the loss gets categorized decides whether it's paid. 'It just stopped working' reads as excluded; 'it was dropped' reads as covered."],
+      ["Note your coverage EFFECTIVE date — don't travel high-value gear during a coverage gap","A loss before your coverage starts isn't covered. Newly-added coverage + a fast claim also draws extra scrutiny."],
+      ["Before big trips: take a fresh 'it still works' shot of each item","Proves the item was functioning going into the trip, so damage in transit lands inside your covered window."],
+      ["Know the claim clock — report the loss promptly, then file proof of loss on time","Most policies require prompt notice ('as soon as practicable'), then a sworn proof of loss — often within a set window like 60 days of the insurer's request. The exact deadlines live in your policy's 'Duties After Loss' section; miss them and a valid claim can be denied."],
+      ["Never conceal or guess on a claim — answer truthfully, 'I don't know' is fine","Concealing a material fact can void your entire policy. Honesty is also the only thing that protects you from a fraud finding."],
+    ]
+  },
+  renters:{
+    label:"Renters / Home contents", emoji:"🏠",
+    blurb:"Everything you own inside your place — theft, fire, water.",
+    items:[
+      ["Do a room-by-room video walkthrough of everything you own, narrated","A dated video inventory is the fastest, most credible proof of loss after a fire or burglary."],
+      ["Keep receipts for big-ticket items and serials for electronics","Proves both value and identity — the two things a claim needs for expensive stuff."],
+      ["Photograph serial numbers on TVs, laptops, appliances","Theft claims and recovery both hinge on identifiers you can't recall from memory."],
+      ["Read your dec page: contents limit, deductible, and special sub-limits","Jewelry, electronics, and cash are often capped surprisingly low — you may be underinsured on exactly what gets stolen."],
+      ["Check replacement-cost vs. actual-cash-value (ACV)","ACV pays the depreciated value — often a nasty surprise. Replacement cost is what you actually want."],
+      ["Store your inventory OFF-site or in the cloud","A fire destroys the house and the paper inventory in the drawer. Your proof has to survive the loss."],
+      ["Learn the theft rules: report to police as soon as possible and keep the report number","A police report number is usually required to pay a theft claim, and you must notify your insurer promptly. Report fast — no report often means no payout, no matter how real the theft was."],
+      ["Know that flood and earthquake are usually excluded","These need separate policies. Assuming you're covered is how people lose everything twice."],
+    ]
+  },
+  auto:{
+    label:"Auto", emoji:"🚗",
+    blurb:"Your car — accidents, theft, glass, weather.",
+    items:[
+      ["Photograph your car's current condition (all sides, odometer, interior), dated","A baseline defuses 'that dent was already there' disputes on any future claim."],
+      ["Know your coverages: liability vs. collision vs. comprehensive — and each deductible","Different coverages pay for different losses. Not knowing which you have is how people expect a payout that isn't there."],
+      ["Keep your insurance card and policy number on your phone","You need it at an accident scene, and you won't want to dig for it then."],
+      ["Learn the accident script: safety first, then photos of every vehicle, the scene, plates, and the other driver's info","Evidence captured at the scene is the whole claim. Ten minutes there beats ten hours of dispute later."],
+      ["Check if you have rental reimbursement, roadside, and uninsured-motorist coverage","These gaps only show up at the worst possible moment. Know them now."],
+      ["Report promptly — long delays can jeopardize a claim","Most policies require timely notice; sitting on it gives the insurer a reason to push back."],
+      ["Know your glass/windshield coverage — it often has its own rules","Windshield repair is sometimes free or low-deductible; knowing saves a needless out-of-pocket."],
+    ]
+  },
+  travel:{
+    label:"Travel", emoji:"✈️",
+    blurb:"Trip insurance — cancellation, delay, medical, baggage.",
+    items:[
+      ["Know what's actually covered: cancellation, delay, medical, baggage — and each cap","These are separate buckets with separate rules. 'Travel insurance' isn't one thing."],
+      ["Save every receipt and confirmation (flights, hotels, tours)","Trip-cost claims pay against proof of pre-paid, non-refundable spend. No receipt, no reimbursement."],
+      ["Photograph the valuables you're bringing before you leave","Baggage claims need proof the item existed and its condition. Do it at home, dated."],
+      ["Carry cameras/laptops/electronics ON — they're usually excluded from CHECKED baggage liability","This exact gap denies real losses: airlines and insurers both disclaim electronics in checked bags."],
+      ["Learn the baggage-damage deadline — report to the carrier, in writing, before you leave the airport if you can","On international flights the Montreal Convention gives you up to 7 days in writing for damaged checked bags; domestic airline rules are often much shorter (sometimes before you leave the airport). Miss the window and both the airline and your insurer deny it."],
+      ["Save the medical coverage details and the 24/7 assistance line","Some medical claims need pre-authorization; the assistance number is what you call before you pay."],
+      ["Document any delay or cancellation with the airline's official notice and timestamps","The paper trail — not your memory — is what the delay/cancellation claim is built on."],
+    ]
+  }
+};
+
+const order = ["valuables","renters","auto","travel"];
+const tabsEl = document.getElementById("tabs");
+const itemsEl = document.getElementById("items");
+const titleEl = document.getElementById("panelTitle");
+const countEl = document.getElementById("panelCount");
+const fillEl = document.getElementById("progfill");
+const readEl = document.getElementById("readout");
+let current = localStorage.getItem("cr_current") || "valuables";
+
+function storeKey(cat){ return "cr_"+cat; }
+function getChecked(cat){
+  try{ return JSON.parse(localStorage.getItem(storeKey(cat))||"[]"); }catch(e){ return []; }
+}
+function setChecked(cat,arr){
+  try{ localStorage.setItem(storeKey(cat), JSON.stringify(arr)); }catch(e){}
+}
+
+function renderTabs(){
+  tabsEl.innerHTML = "";
+  order.forEach(cat=>{
+    const d = DATA[cat];
+    const b = document.createElement("button");
+    b.className="tab"; b.setAttribute("role","tab");
+    b.setAttribute("aria-selected", cat===current ? "true":"false");
+    b.innerHTML = `<span class="em">${d.emoji}</span>${d.label}`;
+    b.onclick = ()=>{ current=cat; localStorage.setItem("cr_current",cat); render(); };
+    tabsEl.appendChild(b);
+  });
+}
+
+function render(){
+  renderTabs();
+  const d = DATA[current];
+  const checked = getChecked(current);
+  titleEl.textContent = d.label;
+  countEl.textContent = d.blurb;
+  itemsEl.innerHTML = "";
+  d.items.forEach((it,i)=>{
+    const li = document.createElement("li");
+    li.className="item";
+    const isOn = checked.includes(i);
+    li.innerHTML =
+      `<label class="cb"><input type="checkbox" ${isOn?"checked":""} aria-label="${it[0].replace(/"/g,'&quot;')}"><span class="box">✓</span></label>`+
+      `<div class="txt"><b>${it[0]}</b><p><span class="lab">Why it matters:</span> ${it[1]}</p></div>`;
+    const input = li.querySelector("input");
+    input.addEventListener("change", ()=>{
+      let arr = getChecked(current);
+      if(input.checked){ if(!arr.includes(i)) arr.push(i); }
+      else { arr = arr.filter(x=>x!==i); }
+      setChecked(current,arr);
+      updateProgress();
+      // toggle strike styling live
+      render();
+    });
+    itemsEl.appendChild(li);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const d = DATA[current];
+  const checked = getChecked(current);
+  const total = d.items.length;
+  const done = checked.filter(i=>i<total).length;
+  const pct = Math.round(done/total*100);
+  fillEl.style.width = pct+"%";
+  if(done===0){ readEl.className="readout"; readEl.textContent = `0 of ${total} done — start with the first item, it's the one that matters most.`; }
+  else if(done<total){ readEl.className="readout"; readEl.textContent = `${done} of ${total} done (${pct}%). Keep going — each one is a denial you're avoiding.`; }
+  else { readEl.className="readout win"; readEl.textContent = `✓ All ${total} done. You're genuinely claim-ready for ${d.label.toLowerCase()} — better documented than most people ever get.`; }
+}
+
+document.getElementById("print").onclick = ()=>window.print();
+document.getElementById("reset").onclick = ()=>{
+  if(confirm("Reset your progress on this list?")){ setChecked(current,[]); render(); }
+};
+
+render();
+</script>
+</body>
+</html>
