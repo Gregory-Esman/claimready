@@ -38,8 +38,16 @@ for (const key of order) {
 }
 
 // Sanity: core UI wiring present.
-for (const needed of ["localStorage", "Why it matters", "window.print", "progfill"]) {
+for (const needed of ["localStorage", "Why it matters", "window.print", "progfill",
+                      "emailMe", "WAITLIST_ENDPOINT", "privacy.html", "terms.html"]) {
   if (!html.includes(needed)) fail(`expected UI wiring not found: ${needed}`);
+}
+
+// Legal pages exist and are non-trivial.
+for (const page of ["privacy.html", "terms.html"]) {
+  const p = path.join(__dirname, page);
+  if (!fs.existsSync(p)) fail(`missing page: ${page}`);
+  if (fs.readFileSync(p, "utf8").length < 800) fail(`page too small: ${page}`);
 }
 // No placeholder junk shipped.
 for (const bad of ["lorem", "TODO", "FIXME", "undefined<"]) {
