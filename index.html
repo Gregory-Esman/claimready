@@ -5,16 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ClaimReady — Get your insurance claim to actually pay</title>
 <meta name="description" content="Insurers bury the rules that decide whether your claim pays. ClaimReady turns your new policy into a plain-English claim-readiness checklist you can finish this week." />
+<meta name="theme-color" content="#12447a" />
+<link rel="canonical" href="https://gregory-esman.github.io/claimready/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312447a'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ClaimReady — get your insurance claim to actually pay" />
+<meta property="og:description" content="Insurers bury the rules that decide whether a claim pays. ClaimReady turns a new policy into a plain-English checklist you can finish this week, so a future claim is provable." />
+<meta property="og:url" content="https://gregory-esman.github.io/claimready/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="ClaimReady — get your insurance claim to actually pay" />
+<meta name="twitter:description" content="Turn a new policy into a plain-English claim-readiness checklist you can finish this week." />
 <style>
   :root{
-    --ink:#0f1c2e; --ink-2:#33475b; --mut:#66788c; --line:#e2e8f0;
+    --ink:#0f1c2e; --ink-2:#33475b; --mut:#586a7d; --line:#e2e8f0;
     --bg:#f7f9fc; --card:#ffffff; --brand:#12447a; --brand-2:#1e6fd0;
-    --amber:#e08a1e; --good:#1f9d63; --good-bg:#e8f6ee;
+    --amber:#e08a1e; --amber-ink:#985f0e; --good:#1f9d63; --good-ink:#137a49; --good-bg:#e8f6ee;
     --shadow:0 1px 2px rgba(15,28,46,.06),0 8px 24px rgba(15,28,46,.06);
+    --ease:cubic-bezier(.22,1,.36,1);
     --radius:14px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+  :where(a,button,input,.tab,.linkbtn):focus-visible{outline:2.5px solid var(--brand-2);outline-offset:2px;border-radius:6px}
   body{
     margin:0;background:var(--bg);color:var(--ink);
     font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -35,44 +47,50 @@
 
   .hero{padding:64px 0 40px;text-align:center}
   .kick{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-    color:var(--amber);background:#fbf1e0;padding:5px 12px;border-radius:999px;margin-bottom:20px}
-  h1{font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;font-weight:820}
+    color:var(--amber-ink);background:#fbf1e0;padding:5px 12px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;font-weight:820;text-wrap:balance}
   h1 .u{background:linear-gradient(180deg,transparent 62%,#fbe0b6 62%)}
   .sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-2);max-width:640px;margin:0 auto 28px}
   .btn{display:inline-block;cursor:pointer;border:0;font:inherit;font-weight:700;
-    background:var(--brand);color:#fff;padding:14px 26px;border-radius:11px;box-shadow:var(--shadow)}
+    background:var(--brand);color:#fff;padding:14px 26px;border-radius:11px;box-shadow:var(--shadow);
+    transition:background .18s var(--ease),transform .18s var(--ease)}
   .btn:hover{background:#0d3763;text-decoration:none}
+  .btn:active{transform:translateY(1px)}
   .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
   .btn.ghost:hover{background:#fff;border-color:#cbd5e1}
   .trust{margin-top:16px;font-size:13.5px;color:var(--mut)}
 
   section{padding:44px 0}
-  .lede{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-2);margin:0 0 8px}
-  h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
+  .lede{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin:0 0 8px}
+  h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:0 0 8px;font-weight:800;text-wrap:balance}
+  .sub{text-wrap:pretty}
   .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-  .why .c{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .why .c{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);
+    transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+  .why .c:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(15,28,46,.06),0 12px 30px rgba(15,28,46,.09)}
   .why .c b{display:block;margin-bottom:6px;font-size:16px}
-  .why .c p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .why .c p{margin:0;color:var(--ink-2);font-size:14.5px;text-wrap:pretty}
 
   /* tool */
   .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
   .tool .top{padding:24px 24px 4px}
   .tabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 20px}
   .tab{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink-2);
-    padding:10px 15px;border-radius:10px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px}
+    padding:10px 15px;border-radius:10px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;
+    transition:border-color .15s var(--ease),background .15s var(--ease),color .15s var(--ease)}
   .tab:hover{border-color:#cbd5e1}
   .tab[aria-selected="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
   .tab .em{font-size:15px}
 
   .panel{border-top:1px solid var(--line);padding:22px 24px 8px;background:#fbfcfe}
-  .paneltitle{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+  .paneltitle{display:flex;flex-direction:column;gap:3px;margin-bottom:4px}
   .paneltitle h3{margin:0;font-size:19px;letter-spacing:-.01em}
-  .paneltitle .n{font-size:13px;color:var(--mut);white-space:nowrap}
+  .paneltitle .n{font-size:13.5px;color:var(--mut);max-width:64ch;text-wrap:pretty}
   .progwrap{margin:14px 0 6px}
   .progbar{height:9px;background:#eaeef4;border-radius:999px;overflow:hidden}
-  .progfill{height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--good));transition:width .35s ease}
+  .progfill{height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--good));transition:width .45s var(--ease)}
   .readout{margin:10px 0 4px;font-size:14.5px;font-weight:600;color:var(--ink-2)}
-  .readout.win{color:var(--good)}
+  .readout.win{color:var(--good-ink)}
 
   ul.items{list-style:none;margin:12px 0 4px;padding:0}
   li.item{display:flex;gap:13px;padding:14px 0;border-top:1px solid var(--line)}
@@ -86,7 +104,7 @@
   .item .txt b{display:block;font-size:15.5px;transition:.12s}
   .cb input:checked ~ .txt b{color:var(--mut);text-decoration:line-through}
   .item .txt p{margin:3px 0 0;color:var(--ink-2);font-size:14px}
-  .item .txt p .lab{color:var(--amber);font-weight:700}
+  .item .txt p .lab{color:var(--amber-ink);font-weight:700}
   .disclaim{margin:16px 0 2px;padding-top:13px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--mut)}
 
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
@@ -109,7 +127,7 @@
   .wl-row{display:flex;flex-wrap:wrap;gap:10px}
   .wl-row input{flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:14px 16px;
     border:2px solid transparent;border-radius:11px;background:#fff;color:var(--ink)}
-  .wl-row input::placeholder{color:#93a3b5}
+  .wl-row input::placeholder{color:#61748a}
   .wl-row input:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 4px rgba(224,138,30,.28)}
   .wl-row .btn{background:var(--amber);color:#3a2400;padding:14px 22px;white-space:nowrap}
   .wl-row .btn:hover{background:#cf7d14}
@@ -125,6 +143,11 @@
     .why{grid-template-columns:1fr}
     .hero{padding:44px 0 28px}
     .nav a.cta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+    .why .c:hover{transform:none}
   }
   @media print{
     header,.hero,.why-sec,.toolbar,.tabs,.foot,.btn,.waitlist{display:none!important}
@@ -148,7 +171,7 @@
     <section class="hero">
       <span class="kick">The stuff insurers won't tell you upfront</span>
       <h1>Your policy hides the rules that decide<br><span class="u">whether your claim actually pays.</span></h1>
-      <p class="sub">Nobody coaches you when you buy insurance. You find out what you were supposed to do — the photos, the dates, the proof — only after a claim gets denied. ClaimReady flips that around: a plain-English checklist you finish <em>this week</em>, so a future claim is provable.</p>
+      <p class="sub">Nobody coaches you when you buy insurance. You find out what you were supposed to do (the photos, the dates, the proof) only after a claim gets denied. ClaimReady flips that around: a plain-English checklist you finish <em>this week</em>, so a future claim is provable.</p>
       <a class="btn" href="#tool">Build my claim-readiness checklist →</a>
       <div class="trust">Free · No account · Nothing leaves your browser · Print &amp; keep</div>
     </section>
@@ -159,9 +182,9 @@
       <p class="lede">Why this exists</p>
       <h2>The system is backward on purpose</h2>
       <div class="why">
-        <div class="c"><b>They disclose, they don't teach</b><p>The rules live in a policy booklet written by lawyers. Legally "told you." Practically, nobody reads it — until it's too late.</p></div>
+        <div class="c"><b>They disclose, they don't teach</b><p>The rules live in a policy booklet written by lawyers. Legally "told you." Practically, nobody reads it until it's too late.</p></div>
         <div class="c"><b>Your agent won't coach you</b><p>Agents sell and service policies. Easier, better-documented claims are worse for the insurer's bottom line. Nobody's paid to prep you.</p></div>
-        <div class="c"><b>You learn at claim time</b><p>The moment you need proof is the moment you discover you don't have it — the working photo, the reliable date, the receipt. Now it's a denial.</p></div>
+        <div class="c"><b>You learn at claim time</b><p>The moment you need proof is the moment you discover you don't have it: the working photo, the reliable date, the receipt. Now it's a denial.</p></div>
       </div>
     </section>
   </div>
@@ -170,7 +193,7 @@
     <section>
       <p class="lede">Do it now, once</p>
       <h2>Build your claim-readiness checklist</h2>
-      <p class="sub" style="margin:6px 0 22px;text-align:left">Pick what you just got covered. Each item tells you <em>why it matters at claim time</em>. Check them off — your progress saves in this browser.</p>
+      <p class="sub" style="margin:6px 0 22px;text-align:left">Pick what you just got covered. Each item tells you <em>why it matters at claim time</em>. Check them off; your progress saves in this browser.</p>
 
       <div class="tool">
         <div class="top" style="padding-bottom:0"></div>
@@ -214,7 +237,7 @@
   <div class="wrap">
     <footer class="foot">
       <p class="big"><strong>Built because a real claim got denied.</strong> A working camera lens, a policy two weeks old, and no dated proof it broke while covered. Every item on these lists is a failure mode someone actually hit. Do them before you need them.</p>
-      <p>ClaimReady is educational, not legal or insurance advice — always read your own policy and confirm specifics with your insurer. Free &amp; open. Nothing you check here is uploaded anywhere.</p>
+      <p>ClaimReady is educational, not legal or insurance advice. Always read your own policy and confirm specifics with your insurer. Free &amp; open. Nothing you check here is uploaded anywhere.</p>
       <p style="margin-top:16px"><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="https://github.com/Gregory-Esman/claimready">Source on GitHub</a></p>
     </footer>
   </div>
