@@ -221,7 +221,7 @@
         <div class="wl-copy">
           <span class="wl-kick">An idea we're weighing</span>
           <b>Would you want a vault that <em>stores</em> your proof?</b>
-          <p>It doesn't exist yet. If enough people want a tool that keeps photos and receipts with tamper-proof dates, we'll build it.</p>
+          <p>It doesn't exist yet. If enough people want a tool that keeps photos and receipts with tamper-proof dates, we may build it.</p>
         </div>
         <div class="wl-form">
           <div class="wl-row">
@@ -409,7 +409,7 @@ const WAITLIST_ENDPOINT = "https://formspree.io/f/mlgypkra";
   const row = wl.querySelector(".wl-row");
   const note = document.getElementById("wlNote");
   const done = ()=>{ row.style.display="none"; note.className="wl-note wl-ok";
-    note.textContent = "Noted, thank you. If enough people want this, we'll build it and let you know."; };
+    note.textContent = "Noted, thank you. If enough people want this we may build it, and we'll let you know."; };
   try{ if(localStorage.getItem("cr_wl")==="1"){ done(); return; } }catch(_){}
   wl.addEventListener("submit", async (e)=>{
     e.preventDefault();
