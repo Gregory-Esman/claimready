@@ -54,3 +54,26 @@ A deployable one-page site: a landing that names the "backward" problem, an inte
 2. Claim-readiness score you can revisit.
 3. Pre-trip / pre-risk reminders.
 4. B2B2C: agents co-brand and hand it to clients at policy binding.
+
+## The paid product — an AI asset vault (the business behind the free tool)
+
+The free web tool teaches you *what* to document. The paid app *does the documenting and keeps it forever*. The free tool manufactures the awareness; the app resolves the anxiety. That's the upsell path.
+
+**Scope discipline:** high-value / claim-prone items (cameras, jewelry, bikes, tools, instruments, electronics), NOT "photograph every grocery receipt." Same desperate-specificity user as the free tool. Keep it a knife, not a firehose.
+
+### Two capture modes (together they're the whole loop)
+- **Video-scan onboarding (seed the vault fast).** Shoot one walkthrough — the house, the camera bag, the toolbox — and the app extracts individual frames, identifies each item, reads model/serial numbers where legible (OCR), and researches current replacement values online. Output: a structured, valued, timestamped inventory (name · model · serial · est. replacement · photo). This is the "wow" demo and it ties straight to the free tool's very first renters item ("do a room-by-room video walkthrough"). *Free teaser: scan one room / one bag free; pay to do the whole house and keep it.*
+- **Point-of-purchase capture (keep it current).** Each new high-value buy: snap the receipt + item, auto-added to the vault. Anchored to an existing habit (buying), so it sticks. Unlock is auto-intake: connect email → auto-pull e-receipts and OCR item/price/date/merchant/serial, so manual photo is the exception.
+
+### The killer output
+**One-tap "generate claim packet"** — export a dossier for an item or a whole category (photos + receipt + serial + server timestamp), ready to hand an adjuster. This is the thing that would have *won* the lens claim.
+
+### Moat & model
+- **Moat:** the accumulating, valued, timestamped personal inventory. Switching cost compounds monthly.
+- **Model:** consumer subscription (peace-of-mind + storage; compute cost of vision+lookups justifies it). Sleeper channel = **B2B2C**: insurer/agent hands it to policyholders at binding — better docs = cleaner, faster, lower-fraud claims + a retention hook; also solves distribution.
+
+### Honest edges (design around, don't oversell)
+- **Serials usually aren't in a walkthrough** (they're on the bottom/back). Video gets existence + condition + model; serials/receipts still need deliberate close-ups. Real flow = "AI drafts 80%, you confirm and fill the gaps."
+- **Replacement values are estimates, not appraisals.** Great as a gap-finder ("am I underinsured?") and a claim starting point; scheduled high-value items still need a receipt/appraisal.
+- **Timestamp credibility:** server upload date beats a wrong camera clock but isn't notarized. Hash each entry and anchor it (tamper-evident log) to make it claim-grade — strengthens the position, doesn't guarantee acceptance.
+- **Trust flips hard.** v1 = "nothing leaves your browser." The app is a cloud vault of receipts, video of your home, and PII — the opposite posture. Encryption, breach exposure, and a much heavier privacy policy are table stakes the moment you cross that line.
