@@ -219,16 +219,16 @@
 
       <form class="waitlist" id="waitlist" hidden>
         <div class="wl-copy">
-          <span class="wl-kick">Coming soon</span>
-          <b>Want the version that <em>stores</em> your proof?</b>
-          <p>We're building a vault that keeps your photos and receipts with tamper-proof timestamps — the piece that actually saves a claim.</p>
+          <span class="wl-kick">An idea we're weighing</span>
+          <b>Would you want a vault that <em>stores</em> your proof?</b>
+          <p>It doesn't exist yet. If enough people want a tool that keeps photos and receipts with tamper-proof dates, we'll build it.</p>
         </div>
         <div class="wl-form">
           <div class="wl-row">
-            <input type="email" id="wlEmail" placeholder="you@email.com" required autocomplete="email" aria-label="Email address for early access" />
-            <button class="btn" type="submit" id="wlBtn">Get early access →</button>
+            <input type="email" id="wlEmail" placeholder="you@email.com" required autocomplete="email" aria-label="Email address to register interest" />
+            <button class="btn" type="submit" id="wlBtn">Tell us you'd use it</button>
           </div>
-          <p class="wl-note" id="wlNote">Optional — one email when it's ready. No spam, no sharing. See our <a href="privacy.html">privacy policy</a>.</p>
+          <p class="wl-note" id="wlNote">No product yet, and no spam. We'd only email you if we actually build it. See our <a href="privacy.html">privacy policy</a>.</p>
         </div>
       </form>
     </section>
@@ -238,7 +238,7 @@
     <footer class="foot">
       <p class="big"><strong>Built because a real claim got denied.</strong> A working camera lens, a policy two weeks old, and no dated proof it broke while covered. Every item on these lists is a failure mode someone actually hit. Do them before you need them.</p>
       <p>ClaimReady is educational, not legal or insurance advice. Always read your own policy and confirm specifics with your insurer. Free &amp; open. Nothing you check here is uploaded anywhere.</p>
-      <p style="margin-top:16px"><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="https://github.com/Gregory-Esman/claimready">Source on GitHub</a></p>
+      <p style="margin-top:16px"><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Use</a></p>
     </footer>
   </div>
 </main>
@@ -409,7 +409,7 @@ const WAITLIST_ENDPOINT = "https://formspree.io/f/mlgypkra";
   const row = wl.querySelector(".wl-row");
   const note = document.getElementById("wlNote");
   const done = ()=>{ row.style.display="none"; note.className="wl-note wl-ok";
-    note.textContent = "You're on the early-access list — we'll email you once, when the vault ships."; };
+    note.textContent = "Noted, thank you. If enough people want this, we'll build it and let you know."; };
   try{ if(localStorage.getItem("cr_wl")==="1"){ done(); return; } }catch(_){}
   wl.addEventListener("submit", async (e)=>{
     e.preventDefault();
@@ -427,7 +427,7 @@ const WAITLIST_ENDPOINT = "https://formspree.io/f/mlgypkra";
       try{ localStorage.setItem("cr_wl","1"); }catch(_){}
       done();
     }catch(err){
-      btn.disabled = false; btn.textContent = "Get early access →";
+      btn.disabled = false; btn.textContent = "Tell us you'd use it";
       note.className = "wl-note"; note.textContent = "That didn't go through — try again in a moment.";
     }
   });
