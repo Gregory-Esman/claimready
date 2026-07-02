@@ -95,20 +95,28 @@
   .linkbtn{background:none;border:0;font:inherit;color:var(--brand-2);cursor:pointer;font-weight:600;padding:0}
   .linkbtn:hover{text-decoration:underline}
 
-  /* keep it / opt-in */
-  .keep{border-top:1px solid var(--line);padding:20px 24px 24px;background:#fbfcfe}
-  .keep-in{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
-  .keep-copy b{display:block;font-size:15.5px}
-  .keep-copy p{margin:2px 0 0;color:var(--ink-2);font-size:14px}
-  .waitlist{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line)}
-  .wl-copy b{font-size:15.5px}
-  .wl-copy b em{font-style:normal;background:linear-gradient(180deg,transparent 60%,#fbe0b6 60%)}
-  .wl-copy p{margin:4px 0 0;color:var(--ink-2);font-size:14px}
-  .wl-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-  .wl-row input{flex:1 1 240px;min-width:0;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
-  .wl-row input:focus{outline:2px solid var(--brand-2);outline-offset:1px;border-color:var(--brand-2)}
-  .wl-note{margin:9px 0 0;font-size:12.5px;color:var(--mut)}
-  .wl-note.wl-ok{color:var(--good);font-weight:600}
+  .toolbar-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+  /* early-access card — its own prominent section, not a cramped strip */
+  .waitlist{margin:24px 0 0;background:var(--brand);color:#fff;border-radius:18px;
+    padding:30px 32px;box-shadow:0 10px 30px rgba(15,28,46,.14);
+    display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center}
+  .wl-kick{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+    color:#f4c47e;margin-bottom:10px}
+  .wl-copy b{display:block;font-size:22px;line-height:1.2;letter-spacing:-.01em;margin-bottom:8px;color:#fff}
+  .wl-copy b em{font-style:normal;background:linear-gradient(180deg,transparent 60%,rgba(224,138,30,.6) 60%)}
+  .wl-copy p{margin:0;color:#cfe0f2;font-size:15px}
+  .wl-row{display:flex;flex-wrap:wrap;gap:10px}
+  .wl-row input{flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:14px 16px;
+    border:2px solid transparent;border-radius:11px;background:#fff;color:var(--ink)}
+  .wl-row input::placeholder{color:#93a3b5}
+  .wl-row input:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 4px rgba(224,138,30,.28)}
+  .wl-row .btn{background:var(--amber);color:#3a2400;padding:14px 22px;white-space:nowrap}
+  .wl-row .btn:hover{background:#cf7d14}
+  .wl-note{margin:11px 0 0;font-size:12.5px;color:#a9c5e4}
+  .wl-note a{color:#e9f2fb;text-decoration:underline}
+  .wl-note.wl-ok{color:#bfeccf;font-weight:600}
+  @media(max-width:680px){ .waitlist{grid-template-columns:1fr;gap:18px;padding:24px 22px} }
 
   .foot{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--mut);font-size:14px}
   .foot .big{color:var(--ink-2);font-size:15px;max-width:640px;margin:0 0 14px}
@@ -119,7 +127,7 @@
     .nav a.cta{display:none}
   }
   @media print{
-    header,.hero,.why-sec,.toolbar,.tabs,.foot,.btn,.keep{display:none!important}
+    header,.hero,.why-sec,.toolbar,.tabs,.foot,.btn,.waitlist{display:none!important}
     body{background:#fff}
     .tool{border:0;box-shadow:none}
     .panel{background:#fff}
@@ -178,30 +186,28 @@
           <p class="disclaim">General guidance — your policy's actual terms control. Educational, not legal or insurance advice.</p>
         </div>
         <div class="toolbar">
-          <span class="small">Saved automatically on this device. <button class="linkbtn" id="reset">Reset this list</button></span>
-          <button class="btn" id="print" style="padding:10px 18px">🖨 Print / save as PDF</button>
-        </div>
-        <div class="keep" id="keep">
-          <div class="keep-in">
-            <div class="keep-copy">
-              <b>Don't lose this list.</b>
-              <p>You did the hard part. Email it to yourself so it doesn't vanish when you close the tab.</p>
-            </div>
-            <button class="btn ghost" id="emailMe">📧 Email myself this checklist</button>
+          <span class="small">Saved on this device. <button class="linkbtn" id="reset">Reset</button></span>
+          <div class="toolbar-actions">
+            <button class="btn ghost" id="emailMe">📧 Email myself</button>
+            <button class="btn" id="print">🖨 Print / save as PDF</button>
           </div>
-          <form class="waitlist" id="waitlist" hidden>
-            <div class="wl-copy">
-              <b>Want the version that <em>stores</em> your proof?</b>
-              <p>We're building a vault that keeps your photos and receipts with tamper-proof timestamps — the piece that actually saves a claim. Want first access?</p>
-            </div>
-            <div class="wl-row">
-              <input type="email" id="wlEmail" placeholder="you@email.com" required autocomplete="email" aria-label="Email address for early access" />
-              <button class="btn" type="submit" id="wlBtn">Get early access →</button>
-            </div>
-            <p class="wl-note" id="wlNote">Optional. One email when it's ready — no spam, no sharing. See our <a href="privacy.html">privacy policy</a>.</p>
-          </form>
         </div>
       </div>
+
+      <form class="waitlist" id="waitlist" hidden>
+        <div class="wl-copy">
+          <span class="wl-kick">Coming soon</span>
+          <b>Want the version that <em>stores</em> your proof?</b>
+          <p>We're building a vault that keeps your photos and receipts with tamper-proof timestamps — the piece that actually saves a claim.</p>
+        </div>
+        <div class="wl-form">
+          <div class="wl-row">
+            <input type="email" id="wlEmail" placeholder="you@email.com" required autocomplete="email" aria-label="Email address for early access" />
+            <button class="btn" type="submit" id="wlBtn">Get early access →</button>
+          </div>
+          <p class="wl-note" id="wlNote">Optional — one email when it's ready. No spam, no sharing. See our <a href="privacy.html">privacy policy</a>.</p>
+        </div>
+      </form>
     </section>
   </div>
 
